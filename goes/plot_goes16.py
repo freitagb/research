@@ -143,9 +143,15 @@ class goes16:
                    urcrnrlat = self.ur_lat, urcrnrlon=self.ur_lon,
                    resolution='i',area_thresh=1500.)
 
+        shp = m.readshapefile("/rstor/freitagb/floods/urban_files/cb_2016_us_ua10_500k",'cities',drawbounds=False)
+        for info,shape in zip(m.cities_info,m.cities):
+            if 'Huntsville' in info['NAME10']:
+        #    if 'Houston' in info['NAME10']:
+                x,y = zip(*shape)
+                m.plot(x,y,color='k',linewidth=1.0, ax=ax)
+
         levs = np.linspace(180,300,61,endpoint=True)
         ticks = np.linspace(180,300,7, endpoint=True)
-
         label = 'Brightness Temperature (K)'
         #define the plot axis to the be axis defined above
         ax = axes
